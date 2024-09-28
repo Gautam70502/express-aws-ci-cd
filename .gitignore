@@ -1,0 +1,7 @@
+# env file
+.env
+
+# Dependency directories
+node_modules/
+
+# Docker Ignore
