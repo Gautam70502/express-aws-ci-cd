@@ -1,5 +1,4 @@
   name : Deploy to ECS
-
   on : 
     push :
       branches : main
@@ -32,5 +31,7 @@
           AWS_ECR_URI: ${{ secrets.AWS_ECR_URI }}
           AWS_ECR_REPOSITORY: backend-image
         run : |
-          docker build -t $AWS_ECR_URI/$AWS_ECR_REPOSITORY:latest .
-          docker push $AWS_ECR_URI/$AWS_ECR_REPOSITORY:latest
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/t4o7l9s3
+          docker build -t $AWS_ECR_REPOSITORY .
+          docker tag backend-image:latest $AWS_ECR_URI:latest
+          docker push $AWS_ECR_URI:latest
