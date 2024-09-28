@@ -18,6 +18,10 @@
           aws-region: ap-southeast-2
       - name: Login to Amazon ECR
         id: login-ecr
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ap-southeast-2
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build and Push Image to ECR
         env : 
