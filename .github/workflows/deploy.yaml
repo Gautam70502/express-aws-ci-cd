@@ -81,5 +81,5 @@
       - name: remove older images from ecr
         uses: LeiaInc/devops-delete-old-aws-ecr-images@v1
         with:
-          repo-name: ecr-name-service
+          repo-name: backend-image
           qtd-images: 1
