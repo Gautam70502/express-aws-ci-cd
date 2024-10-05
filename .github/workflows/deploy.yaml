@@ -82,4 +82,4 @@
         uses: LeiaInc/devops-delete-old-aws-ecr-images@v1
         with:
           repo-name: ecr-name-service
-          qtd-images: 0
+          qtd-images: 1
