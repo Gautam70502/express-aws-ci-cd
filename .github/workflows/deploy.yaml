@@ -25,12 +25,12 @@
       - name: Remove older images from ECR
         run: |
           # Get the list of image digests except the 'latest' tag
-          aws ecr list-images --repository-name backend-image --region ap-southeast-2 --query 'imageIds[?imageTag!=`latest`].imageDigest' --output text > old_images.txt
+          aws ecr-public list-images --repository-name backend-image --region us-east-1 --query 'imageIds[?imageTag!=`latest`].imageDigest' --output text > old_images.txt
 
           # If there are old images, remove them
           if [ -s old_images.txt ]; then
             for digest in $(cat old_images.txt); do
-              aws ecr batch-delete-image --repository-name backend-image --image-ids imageDigest=$digest --region ap-southeast-2
+              aws ecr-public batch-delete-image --repository-name backend-image --image-ids imageDigest=$digest --region us-east-1
             done
           else
             echo "No old images to remove."
