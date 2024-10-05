@@ -82,7 +82,7 @@
         run: |
           aws ecr-public describe-images \
             --repository-name backend-image \
-            --region us-east-1 \
+            --region ap-southeast-2 \
             --query 'imageDetails[?!(contains(imageTags, `latest`))].imageDigest' \
             --output text | xargs -I {} aws ecr-public batch-delete-image \
             --repository-name backend-image \
