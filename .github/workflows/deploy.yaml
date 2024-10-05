@@ -24,8 +24,8 @@
           aws-region: ap-southeast-2
       - name: Remove older images from ECR
         run: |
-          # Get the list of image digests except the 'latest' tag
-          aws ecr-public list-images --repository-name backend-image --region us-east-1 --query 'imageIds[?imageTag!=`latest`].imageDigest' --output text > old_images.txt
+         # Get the list of image digests except the 'latest' tag
+          aws ecr-public describe-images --repository-name backend-image --region us-east-1 --query 'imageDetails[?not_null(imageTags[?contains(@, `latest`) == `false`])].imageDigest' --output text > old_images.txt
 
           # If there are old images, remove them
           if [ -s old_images.txt ]; then
